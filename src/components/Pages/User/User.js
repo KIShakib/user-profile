@@ -5,6 +5,7 @@ import globe from "../../../assets/globe.png";
 import heartStroke from "../../../assets/herat-stroke.png";
 import heartFull from "../../../assets/heart-full.png";
 import Modal from '../Shared/Modal/Modal';
+import { toast } from 'react-hot-toast';
 
 const User = ({ user, handleRemoveUser, index }) => {
     const [like, setLike] = useState(false);
@@ -27,6 +28,18 @@ const User = ({ user, handleRemoveUser, index }) => {
         setWebsite(website);
         setModalOpen(!modalOpen);
     }
+
+    const handleLike = () => {
+        setLike(!like);
+        if (like === false) {
+            toast.success("Like Added");
+        }
+        else if (like === true) {
+            toast.error("Like Removed");
+        }
+    }
+
+
     return (
         <div className='rounded-sm border'>
             <div className='bg-[#F5F5F5] flex justify-center'>
@@ -49,7 +62,8 @@ const User = ({ user, handleRemoveUser, index }) => {
             </div>
             <div className='bg-[#F5F5F5] flex justify-evenly py-3'>
                 <div className='flex items-center'>
-                    <button onClick={() => setLike(!like)}>
+                    <button
+                        onClick={handleLike}>
                         {
                             like ? <img className='w-4' src={heartFull} alt="" />
                                 : <img className='w-4' src={heartStroke} alt="" />
