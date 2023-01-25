@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../../../features/usersSlice/usersSlice';
 import Loader from '../Shared/Loader/Loader';
-import Modal from '../Shared/Modal/Modal';
 import User from '../User/User';
 
 const Users = () => {
-    const [likes, setLikes] = useState([]);
     const { users, error, isLoading } = useSelector(state => state.users);
 
 
@@ -16,8 +14,8 @@ const Users = () => {
     }, [dispatch]);
 
 
-    const handleRemoveUser = user => {
-        const index = users.indexOf(user);
+    const handleRemoveUser = id => {
+        console.log(id);
     }
 
     return (
@@ -27,20 +25,17 @@ const Users = () => {
                     isLoading && <div className='h-screen flex justify-center items-center'><Loader /></div>
                 }
             </div>
-            <div className='grid grid-cols-4 gap-6 p-3'>
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 p-3'>
                 {
                     users?.map((user, index) =>
                         <User
                             index={index}
                             key={index}
                             user={user}
-                            likes={likes}
-                            setLikes={setLikes}
                             handleRemoveUser={handleRemoveUser}
                         />)
                 }
             </div>
-            <Modal />
         </div>
     );
 };

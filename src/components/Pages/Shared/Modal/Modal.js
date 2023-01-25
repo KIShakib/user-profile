@@ -1,52 +1,49 @@
 import React from 'react';
 
-const Modal = () => {
-
-    // const button = document.querySelector('.modal-button')
-    // button.addEventListener('click', toggleModal)
-
-    // const overlay = document.querySelector('.modal-overlay')
-    // overlay.addEventListener('click', toggleModal)
-
-
-    // function toggleModal() {
-    //     const modal = document.querySelector('.modal')
-    //     modal.classList.toggle('opacity-0')
-    //     modal.classList.toggle('pointer-events-none')
-    // }
+const Modal = ({ setModalOpen, modalOpen, user, handleInput }) => {
 
 
     return (
-        <div className="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-            <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
-            <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-
-                <div className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-                    <svg className="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                    </svg>
-                    <span className="text-sm">(Esc)</span>
-                </div>
-                <div className="modal-content py-4 text-left px-6">
-                    <div className="flex justify-between items-center pb-3">
-                        <p className="text-2xl font-bold">Simple Modal!</p>
+        <div className="fixed w-full h-full top-0 left-0 flex items-center justify-center">
+            <div onClick={() => setModalOpen(!modalOpen)} className="absolute w-full h-full opacity-60 bg-blend-overlay bg-black"></div>
+            <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded z-50 overflow-y-auto">
+                <div className="modal-content py-4 text-left">
+                    <div className="flex justify-between items-center pb-3 px-6">
+                        <p className="text-2xl font-bold">Edit Details</p>
                         <div className="modal-close cursor-pointer z-50">
-                            <svg className="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                            </svg>
+                            <button onClick={() => setModalOpen(!modalOpen)}>
+                                <svg className="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                    <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <p>Modal content can go here</p>
-                    <p>...</p>
-                    <p>...</p>
-                    <p>...</p>
-                    <p>...</p>
-                    <div className="flex justify-end pt-2">
-                        <button className="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
-                        <button className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+                    <hr className='my-2' />
+                    <div className='px-6 py-6'>
+                        <form onSubmit={handleInput} className="flex flex-col gap-y-8">
+                            <label className='flex justify-center items-center gap-x-2'>
+                                <h5><span className='text-red-500'>*</span> Name:</h5>
+                                <input className='border px-2' name='name' defaultValue={user.name} required type="text" />
+                            </label>
+                            <label className='flex justify-center items-center gap-x-2'>
+                                <h5><span className='text-red-500'>*</span> Email:</h5>
+                                <input className='border px-2' name='email' defaultValue={user.email} required type="email" />
+                            </label>
+                            <label className='flex justify-center items-center gap-x-2'>
+                                <h5><span className='text-red-500'>*</span> Phone:</h5>
+                                <input className='border px-2' name='phone' defaultValue={user.phone} required type="tel" />
+                            </label>
+                            <label className='flex justify-center items-center gap-x-2'>
+                                <h5><span className='text-red-500'>*</span> Website:</h5>
+                                <input className='border px-2' name='website' defaultValue={user.website} required type="text" />
+                            </label>
+                            <hr className='' />
+                            <div className="flex justify-end gap-x-4 px-6">
+                                <button onClick={() => setModalOpen(!modalOpen)} className="border px-4 font-semibold rounded">Cancel</button>
+                                <button className="px-4 py-1 rounded bg-blue-500 text-white font-bold">OK</button>
+                            </div>
+                        </form>
                     </div>
-
                 </div>
             </div>
         </div>
